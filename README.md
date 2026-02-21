@@ -33,7 +33,6 @@ Name
 👉 This acts like a mini database
 
 2. Account Verification
-3. 
 acc_no = input("Enter Account Number: ")
 
 Checks if the account exists
@@ -41,7 +40,6 @@ Checks if the account exists
 If not → "Account not found."
 
 3. PIN Authentication
-4. 
 while attempts < 3:
 
 User gets 3 chances
