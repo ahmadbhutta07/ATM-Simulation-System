@@ -12,3 +12,98 @@ Account Blocking After Failed Attempts.
 Low Balance Warning.
 Uses match-case for menu handling.
 Easy to Understand Code.
+How It Works (Step-by-Step)
+
+1. User Database
+users = {
+    "1001": {"pin": "1234", "balance": 5000, "name": "Ali"},
+    ...
+}
+
+Stores account number as key
+
+Each user has:
+
+PIN
+
+Balance
+
+Name
+
+👉 This acts like a mini database
+
+2. Account Verification
+acc_no = input("Enter Account Number: ")
+
+Checks if the account exists
+
+If not → "Account not found."
+
+3. PIN Authentication
+while attempts < 3:
+
+User gets 3 chances
+
+If correct → access granted
+
+If wrong → attempts increase
+
+If all fail → account blocked
+
+4. ATM Menu (Core Logic)
+
+Menu runs using an infinite loop:
+
+while True:
+
+Handled using:
+
+match choice:
+🔧 Functionalities
+✅ Check Balance
+
+Displays current balance:
+
+print("Balance:", user["balance"])
+💰 Deposit
+
+Accepts amount
+
+Must be greater than 0
+
+Adds to balance
+
+user["balance"] += amount
+💸 Withdraw
+
+Conditions:
+
+Amount must be positive
+
+Must not exceed balance
+
+elif amount > user["balance"]:
+
+After withdrawal:
+
+Updates balance
+
+Shows a warning if the balance < 1000
+
+🚪 Exit
+
+Breaks the loop and ends the program
+
+🛠️ Concepts Used
+
+Dictionary (data storage)
+
+Loops (while)
+
+Conditional statements (if-elif-else)
+
+match-case (Python switch)
+
+Input handling
+
+State updates (balance changes)
