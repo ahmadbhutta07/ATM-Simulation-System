@@ -1,0 +1,122 @@
+#include <iostream>
+#include <map>
+using namespace std;
+
+// Structure for User
+struct User {
+    string pin;
+    double balance;
+    string name;
+};
+
+int main() {
+
+    // User database
+    map<string, User> users;
+
+    users["1001"] = {"1234", 5000, "Ali"};
+    users["1002"] = {"5678", 8000, "Ahmad"};
+    users["1003"] = {"9999", 12000, "Hassam"};
+    users["1004"] = {"1010", 5000, "Muneeb"};
+    users["1005"] = {"1122", 8000, "Ahmad Sharif"};
+    users["1006"] = {"3344", 12000, "Eman"};
+
+    string acc_no;
+    cout << "Enter Account Number: ";
+    cin >> acc_no;
+
+    // Check account
+    if (users.find(acc_no) == users.end()) {
+        cout << "Account not found" << endl;
+        return 0;
+    }
+
+    User &user = users[acc_no];
+
+    // PIN verification
+    int attempts = 0;
+    const int max_attempts = 3;
+    string pin;
+
+    while (attempts < max_attempts) {
+        cout << "Enter PIN: ";
+        cin >> pin;
+
+        if (pin == user.pin) {
+            cout << "Welcome " << user.name << endl;
+            break;
+        } else {
+            attempts++;
+            cout << "Wrong PIN" << endl;
+        }
+    }
+
+    if (attempts == max_attempts) {
+        cout << "Account Blocked" << endl;
+        return 0;
+    }
+
+    // ATM Menu
+    int choice;
+    while (true) {
+        cout << "\n--- ATM MENU ---" << endl;
+        cout << "1. Check Balance" << endl;
+        cout << "2. Deposit" << endl;
+        cout << "3. Withdraw" << endl;
+        cout << "4. Exit" << endl;
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        switch (choice) {
+
+            case 1:
+                cout << "Balance: " << user.balance << endl;
+                break;
+
+            case 2: {
+                double amount;
+                cout << "Enter amount: ";
+                cin >> amount;
+
+                if (amount > 0) {
+                    user.balance += amount;
+                    cout << "Deposit successful" << endl;
+                } else {
+                    cout << "Invalid amount" << endl;
+                }
+                break;
+            }
+
+            case 3: {
+                double amount;
+                cout << "Enter amount: ";
+                cin >> amount;
+
+                if (amount <= 0) {
+                    cout << "Invalid amount" << endl;
+                } 
+                else if (amount > user.balance) {
+                    cout << "Insufficient balance" << endl;
+                } 
+                else {
+                    user.balance -= amount;
+                    cout << "Withdrawal successful" << endl;
+
+                    if (user.balance < 1000) {
+                        cout << "Warning: Low Balance" << endl;
+                    }
+                }
+                break;
+            }
+
+            case 4:
+                cout << "Thank you for using ATM" << endl;
+                return 0;
+
+            default:
+                cout << "Invalid choice" << endl;
+        }
+    }
+
+    return 0;
+}
